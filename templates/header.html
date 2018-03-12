@@ -1,0 +1,19 @@
+<header class="row">
+	<!-- Fixed navbar -->
+	<nav class="navbar navbar-inverse navbar-dark fixed-top head">
+		<a class="navbar-brand title" href="{{url_for('showCategories')}}">
+			Catalog App
+		</a>
+		
+		<ul class="navbar-nav navbar-right">
+			<li class="nav-item login">
+				{% if 'username' not in session %}
+				<a href="{{url_for('showCategories')}}">Login</a>
+				{% else %}
+				<a href="{{url_for('showCategories')}}">Logout</a>
+				{% endif %}
+			</li>
+		</ul>
+		
+	</nav>
+</header>

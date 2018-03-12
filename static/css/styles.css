@@ -1,0 +1,51 @@
+/*
+*
+* Body
+*
+*/
+
+.margin-top {
+	margin-top: 99px;
+}
+
+a:hover {
+	text-decoration: none !important;
+}
+
+/*
+*
+* Header
+*
+*/
+
+.head {
+	background-color: #021f40;
+}
+
+.title {
+	font-size: 2em !important;
+	color: #fff !important;
+	margin-left: 5%;
+	
+}
+
+.login {
+	margin-right: 50px;
+}
+
+/*
+*
+* Contents
+*
+*/
+.capitalize {
+	text-transform: capitalize;
+}
+
+.oblique {
+    font-style: oblique;
+}
+.active {
+	color: red;
+	background-color: green;
+}
