@@ -15,6 +15,24 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 
+#JSON APIs to view Catalog Information
+@app.route('/category/JSON')
+def categoriesJSON():
+    categories = session.query(Category).all()
+    return jsonify(categories=[c.serialize for c in categories])
+
+
+@app.route('/category/<int:category_id>/items/JSON')
+def categoryListJSON(category_id):
+    items = session.query(ListItem).filter_by(category_id = category_id).all()
+    return jsonify(ListItems=[i.serialize for i in items])
+
+
+@app.route('/category/<int:category_id>/items/<int:item_id>/JSON')
+def menuItemJSON(category_id, item_id):
+    item = session.query(ListItem).filter_by(id = item_id).one()
+    return jsonify(item=item.serialize)
+
 
 #Show all categories
 @app.route('/')
