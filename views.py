@@ -198,18 +198,31 @@ def getUserID(email):
 # JSON APIs to view Catalog Information
 @app.route('/category/JSON')
 def categoriesJSON():
+    if 'username' not in login_session:
+        return redirect('/login')
     categories = session.query(Category).all()
     return jsonify(categories=[c.serialize for c in categories])
+
+@app.route('/items/JSON')
+def itemsJSON():
+    if 'username' not in login_session:
+        return redirect('/login')
+    items = session.query(ListItem).all()
+    return jsonify(items=[i.serialize for i in items])
 
 
 @app.route('/category/<int:category_id>/items/JSON')
 def categoryListJSON(category_id):
+    if 'username' not in login_session:
+        return redirect('/login')
     items = session.query(ListItem).filter_by(category_id=category_id).all()
     return jsonify(ListItems=[i.serialize for i in items])
 
 
 @app.route('/category/<int:category_id>/items/<int:item_id>/JSON')
-def menuItemJSON(category_id, item_id):
+def itemJSON(category_id, item_id):
+    if 'username' not in login_session:
+        return redirect('/login')
     item = session.query(ListItem).filter_by(id=item_id).one()
     return jsonify(item=item.serialize)
 

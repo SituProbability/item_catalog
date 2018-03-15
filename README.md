@@ -45,6 +45,27 @@ After making the vagrant operational and successfully installed the requirements
 Inside project folder, type ```python views.py```. Then type in the browser ```http://localhost:8000/```,
 and it will forward you to the categories page if you're not logged in; Otherwise, if you'll logged in you will see some activated menus for CRUD.
 
+### Running JSON
+The app have also JSON endpoints for log-in users.
+Type in the browser with followings:
+Request for all categories.
+```
+http://localhost:8000/category/JSON
+```
+Request for all items.
+```
+http://localhost:8000/items/JSON
+```
+Request for all items of a specific category.
+```
+http://localhost:8000/category/<int:category_id>/items/JSON
+```
+Request for a specific item.
+```
+http://localhost:8000//category/<int:category_id>/items/<int:item_id>/JSON'
+```
+
+
 
 ### Future Features
 There are some upgrades that will make the app better, such as adding CSRF protection on CRUD operations, more third party OAuth.
