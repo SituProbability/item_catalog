@@ -1,8 +1,7 @@
 {% extends "main.html" %}
 {% block content %}
 {% include "header.html" %}
-	
-	<div class="flash margin-top">
+	<div class = 'flash margin-top'>
 		{% with messages = get_flashed_messages() %}
 		{% if messages %}
         <ul>
@@ -13,7 +12,7 @@
         {% endif %}
 		{% endwith %}
 	</div>
-	
+
 	<div class="row">
 		<div class="col-md-1"></div>
 		
@@ -23,25 +22,21 @@
 			</a>
 			<h2>Categories</h2>
 			{% for category in categories %}
-				<a class="capitalize text-color" 
-					href = "{{url_for('showList', category_id=category.id)}}">
-					<h4 class="border-bottom">{{category.name}}</h4>		
+				<a class="capitalize text-color" href = "{{url_for('showList', category_id=category.id)}}">
+					<h4 class="border-bottom" {% if category.id == category_id %}id="active"{% endif %}>{{category.name}}</h4>		
 				</a>
-			{% endfor %}
-		</div>
-			
-		<div class="col-sm-7 panel">
+			{% endfor %}			
+		</div>		
+				
+		<div class="col-sm-7 panel">			
 			<h2>Latest Items</h2>
 			{% for item in items %}
-				<a class="capitalize text-color" 
-					href="{{url_for('showListItem', category_id=item.category_id, item_id=item.id)}}">
-					<h4 class="border-bottom">{{item.name}} 
-						<span class="oblique">({{item.category.name}})</span></h4>		
+				<a class="capitalize text-color" href = "{{url_for('showListItem', category_id=item.category_id, item_id=item.id)}}">
+					<h4 class="border-bottom">{{item.name}} (<span class="oblique">{{item.category.name}}</span>)</h4>		
 				</a>
-			{% endfor %}
+			{% endfor %}	
 		</div>
 		
-		<div class="col-md-1"></div>
 	</div>
-
+		
 {% endblock %}

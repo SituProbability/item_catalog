@@ -124,7 +124,6 @@ def gconnect():
     login_session['picture'] = data['picture']
     login_session['email'] = data['email']
 
-    print login_session['username'], login_session['email']
     # see if user exists, if it doesn't make a new one
     user_id = getUserID(login_session['email'])
     if not user_id:
@@ -303,9 +302,15 @@ def showList(category_id):
     items = session.query(ListItem).filter_by(category_id=category_id
                                               ).order_by(desc(ListItem.id))
     creator = getUserInfo(category.user_id)
+    if 'username' not in login_session:
+        return render_template('publiclist.html',
+                               items=items,
+                               category=category,
+                               categories=categories,
+                               category_id=category_id)
     if 'username' not in login_session \
        or creator.id != login_session['user_id']:
-        return render_template('publiclist.html',
+        return render_template('categorylist.html',
                                items=items,
                                category=category,
                                categories=categories,
@@ -322,7 +327,9 @@ def showList(category_id):
 @app.route('/category/<int:category_id>/item/<int:item_id>/')
 def showListItem(category_id, item_id):
     item = session.query(ListItem).filter_by(id=item_id).one()
-    if 'username' not in login_session:
+    creator = getUserInfo(item.user_id)
+    if 'username' not in login_session \
+       or creator.id != login_session['user_id']:
         return render_template('publiclistitem.html',
                                item=item,
                                category_id=category_id,

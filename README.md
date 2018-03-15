@@ -36,7 +36,7 @@ CLIENT_ID = json.loads(open('client_secrets.json', 'r').read())[
 ```
 Replace the "data-clientid" in login.html with your client ID.
 
-Test the Google OAuth if its operational by running the app ```python main.py``` then typing in the browser ```http://localhost:8000/gconnect/```.
+Test the Google OAuth if its operational by running the app ```python views.py``` then typing in the browser ```http://localhost:8000/gconnect/```.
 It will redirect the user in the google plus login prompt.  
 
 ## Running the App
