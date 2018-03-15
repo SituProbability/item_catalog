@@ -1,8 +1,27 @@
-/*
-*
-* Header
-*
-*/
+
+.banner {
+	height: 150px;
+}
+
+.banner h2 {
+	margin: 45px 0;
+}
+
+.creator {
+	padding-right: 20px;
+	margin-top: -25px;
+	text-align: right;
+	float:right;
+}
+.creator img {
+	width: 100px;
+	border-radius: 50%;
+}
+.creator figcaption {
+	font-size: 14px;
+	color: #7B7573;
+	font-weight: 500;
+}
 
 .head {
 	background-color: #021f40;
@@ -19,14 +38,9 @@
 	margin-right: 50px;
 }
 
-/*
-*
-* Contents
-*
-*/
-
 a:hover {
 	text-decoration: none !important;
+	color: red !important;
 }
 
 .capitalize {
@@ -61,4 +75,7 @@ h2 {
 
 .margin-top {
 	margin-top: 99px;
+}
+.margin-bottom {
+	margin-bottom: 10px;
 }

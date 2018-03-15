@@ -12,11 +12,24 @@
         {% endif %}
 		{% endwith %}
 	</div>
+	
+	<div class="row banner margin-bottom">
+		<div class="col-md-1"></div>
+		<div class="col-md-10 panel">
+			<h2>{{category.name}}
+			<figure class="creator">
+				<img src="{{creator.picture}}">
+				<figcaption>{{creator.name}}</figcaption>
+			</figure>
+			</h2>
+		</div>
+		<div class="col-md-1"></div>
+	</div>
 
 	<div class="row">
 		<div class="col-md-1"></div>
 		
-		<div class="col-sm-3 panel">			
+		<div class="col-sm-3 panel margin-bottom">			
 			<h2>Categories</h2>
 			{% for category in categories %}
 				<a class="capitalize text-color" href = "{{url_for('showList', category_id=category.id)}}">
@@ -25,7 +38,7 @@
 			{% endfor %}			
 		</div>		
 				
-		<div class="col-sm-7 panel">			
+		<div class="col-sm-7 panel margin-bottom">			
 			<h2>Latest Items</h2>
 			{% for item in items %}
 				<a class="capitalize text-color" href = "{{url_for('showListItem', category_id=item.category_id, item_id=item.id)}}">

@@ -12,11 +12,24 @@
         {% endif %}
 		{% endwith %}
 	</div>
+	
+	<div class="row banner margin-bottom">
+		<div class="col-md-1"></div>
+		<div class="col-md-10 panel">
+			<h2>{{category.name}}
+			<figure class="creator">
+				<img src="{{creator.picture}}">
+				<figcaption>{{creator.name}}</figcaption>
+			</figure>
+			</h2>
+		</div>
+		<div class="col-md-1"></div>
+	</div>
 
 	<div class="row">
 		<div class="col-md-1"></div>
 		
-		<div class="col-sm-3 panel">
+		<div class="col-sm-3 panel margin-bottom">
 			<a href="{{url_for('newCategory')}}">
 				<button class="btn btn-primary btn-lg">Add Category</button>
 			</a>
@@ -26,16 +39,16 @@
 					<h4 class="border-bottom" {% if category.id == category_id %}id="active"{% endif %}>{{category.name}}</h4>		
 				</a>
 			{% endfor %}
-			<a href="{{url_for('editCategory', category_id = category.id)}}">
+			<a href="{{url_for('editCategory', category_id = category_id)}}">
 				<button class="btn btn-primary btn-lg">Edit Category</button>
 			</a>
-			<a href="{{url_for('deleteCategory', category_id = category.id)}}">
+			<a href="{{url_for('deleteCategory', category_id = category_id)}}">
 				<button class="btn btn-primary btn-lg">Delete Category</button>
 			</a>
 			<br><br>
 		</div>		
 				
-		<div class="col-sm-7 panel">
+		<div class="col-sm-7 panel margin-bottom">
 			<a href="{{url_for('newListItem', category_id=category_id)}}">
 				<button class="btn btn-primary btn-lg">Add Item</button>
 			</a>

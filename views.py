@@ -231,10 +231,14 @@ def showCategories():
                                items=items,
                                category_id=category_id)
     else:
+        username = login_session['username']
+        picture = login_session['picture']
         return render_template('categories.html',
                                categories=categories,
                                items=items,
-                               category_id=category_id)
+                               category_id=category_id,
+                               username=username,
+                               picture=picture)
 
 
 # Create a new category
@@ -259,6 +263,10 @@ def editCategory(category_id):
     if 'username' not in login_session:
         return redirect('/login')
     editedCategory = session.query(Category).filter_by(id=category_id).one()
+    if editedCategory.user_id != login_session['user_id']:
+        return "<script>function myFunction() {alert('You are not authorized \
+to edit this restaurant. Please create your own restaurant in order \
+to edit.');}</script><body onload='myFunction()'>"
     if request.method == 'POST':
         if request.form['name']:
             editedCategory.name = request.form['name']
@@ -280,6 +288,10 @@ def deleteCategory(category_id):
     categoryToDelete = session.query(Category).filter_by(id=category_id).one()
     itemsToDelete = session.query(ListItem).filter_by(category_id=category_id
                                                       ).all()
+    if categoryToDelete.user_id != login_session['user_id']:
+        return "<script>function myFunction() {alert('You are not authorized \
+to edit this restaurant. Please create your own restaurant in order \
+to edit.');}</script><body onload='myFunction()'>"
     if request.method == 'POST':
         session.delete(categoryToDelete)
         for item in itemsToDelete:
@@ -307,20 +319,23 @@ def showList(category_id):
                                items=items,
                                category=category,
                                categories=categories,
-                               category_id=category_id)
+                               category_id=category_id,
+                               creator=creator)
     if 'username' not in login_session \
        or creator.id != login_session['user_id']:
         return render_template('categorylist.html',
                                items=items,
                                category=category,
                                categories=categories,
-                               category_id=category_id)
+                               category_id=category_id,
+                               creator=creator)
     else:
         return render_template('showlist.html',
                                items=items,
                                category=category,
                                categories=categories,
-                               category_id=category_id)
+                               category_id=category_id,
+                               creator=creator)
 
 
 # Show a list item
@@ -333,12 +348,14 @@ def showListItem(category_id, item_id):
         return render_template('publiclistitem.html',
                                item=item,
                                category_id=category_id,
-                               item_id=item_id)
+                               item_id=item_id,
+                               creator=creator)
     else:
         return render_template('showlistitem.html',
                                item=item,
                                category_id=category_id,
-                               item_id=item_id)
+                               item_id=item_id,
+                               creator=creator)
 
 
 # Create a new item
@@ -375,6 +392,10 @@ def editListItem(category_id, item_id):
     categories = session.query(Category)
     editedItem = session.query(ListItem).filter_by(id=item_id).one()
     category = session.query(Category).filter_by(id=category_id).one()
+    if editedItem.user_id != login_session['user_id']:
+        return "<script>function myFunction() {alert('You are not authorized \
+to edit this restaurant. Please create your own restaurant in order \
+to edit.');}</script><body onload='myFunction()'>"
     if request.method == 'POST':
         if request.form['name']:
             editedItem.name = request.form['name']
@@ -407,6 +428,10 @@ def deleteListItem(category_id, item_id):
         return redirect('/login')
     categories = session.query(Category)
     itemToDelete = session.query(ListItem).filter_by(id=item_id).one()
+    if itemToDelete.user_id != login_session['user_id']:
+        return "<script>function myFunction() {alert('You are not authorized \
+to edit this restaurant. Please create your own restaurant in order \
+to edit.');}</script><body onload='myFunction()'>"
     if request.method == 'POST':
         session.delete(itemToDelete)
         session.commit()

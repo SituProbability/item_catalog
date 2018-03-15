@@ -1,7 +1,6 @@
 {% extends "main.html" %}
 {% block content %}
 {% include "header.html" %}
-	
 	<div class="flash margin-top">
 		{% with messages = get_flashed_messages() %}
 		{% if messages %}
@@ -14,10 +13,23 @@
 		{% endwith %}
 	</div>
 	
+	<div class="row banner margin-bottom">
+		<div class="col-md-1"></div>
+		<div class="col-md-10 panel">
+			<h2>Welcome, {{username}}.
+			<figure class="creator">
+				<img src="{{picture}}">
+				<figcaption>{{username}}</figcaption>
+			</figure>
+			</h2>
+		</div>
+		<div class="col-md-1"></div>
+	</div>
+		
 	<div class="row">
 		<div class="col-md-1"></div>
 		
-		<div class="col-sm-3 panel">
+		<div class="col-sm-3 panel margin-bottom">
 			<a href="{{url_for('newCategory')}}">
 				<button class="btn btn-primary btn-lg">Add Category</button>
 			</a>
@@ -30,7 +42,10 @@
 			{% endfor %}
 		</div>
 			
-		<div class="col-sm-7 panel">
+		<div class="col-sm-7 panel margin-bottom">
+			<a href="{{url_for('newListItem', category_id=category_id)}}">
+				<button class="btn btn-primary btn-lg">Add Item</button>
+			</a>
 			<h2>Latest Items</h2>
 			{% for item in items %}
 				<a class="capitalize text-color" 
