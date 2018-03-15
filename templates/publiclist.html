@@ -14,27 +14,24 @@
 	</div>
 
 	<div class="row">
-		<div class="col-md-1"></div>	
-		<div class="col-sm-5">			
+		<div class="col-md-1"></div>
+		
+		<div class="col-sm-3 panel">			
 			<h2>Categories</h2>
-			
 			{% for category in categories %}
-				<a class="capitalize" href = "{{url_for('showList', category_id=category.id)}}">
-					<h4 {% if category.id == category_id %}class="active"{% endif %}>{{category.name}}</h4>		
+				<a class="capitalize text-color" href = "{{url_for('showList', category_id=category.id)}}">
+					<h4 class="border-bottom" {% if category.id == category_id %}id="active"{% endif %}>{{category.name}}</h4>		
 				</a>
-			{% endfor %}
-						
+			{% endfor %}			
 		</div>		
 				
-		<div class="col-sm-6">			
+		<div class="col-sm-7 panel">			
 			<h2>Latest Items</h2>
-			
 			{% for item in items %}
-				<a class="capitalize" href = "{{url_for('showListItem', category_id=item.category_id, item_id=item.id)}}">
-					<h4>{{item.name}} (<span class="oblique">{{item.category.name}}</span>)</h4>		
+				<a class="capitalize text-color" href = "{{url_for('showListItem', category_id=item.category_id, item_id=item.id)}}">
+					<h4 class="border-bottom">{{item.name}} (<span class="oblique">{{item.category.name}}</span>)</h4>		
 				</a>
-			{% endfor %}
-			
+			{% endfor %}	
 		</div>
 		
 	</div>

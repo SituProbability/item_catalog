@@ -16,36 +16,35 @@
 	
 	<div class="row">
 		<div class="col-md-1"></div>
-		<div class="col-sm-5">
+		
+		<div class="col-sm-3 panel">
 			<a href="{{url_for('newCategory')}}">
-				<button class="btn btn-default" id="new-category">Add Category</button>
+				<button class="btn btn-primary btn-lg">Add Category</button>
 			</a>
-			
 			<h2>Categories</h2>
-			
 			{% for category in categories %}
-				<a class="capitalize" href = "{{url_for('showList', category_id=category.id)}}">
-					<h4>{{category.name}}</h4>		
+				<a class="capitalize text-color" 
+					href = "{{url_for('showList', category_id=category.id)}}">
+					<h4 class="border-bottom">{{category.name}}</h4>		
 				</a>
 			{% endfor %}
-		
 		</div>
-				
-		<div class="col-sm-6">
+			
+		<div class="col-sm-7 panel">
 			<a href="{{url_for('newListItem', category_id=category_id)}}">
-				<button class="btn btn-default" id="new-category">Add Item</button>
+				<button class="btn btn-primary btn-lg">Add Item</button>
 			</a>
-			
 			<h2>Latest Items</h2>
-			
 			{% for item in items %}
-				<a class="capitalize" href="{{url_for('showListItem', category_id=item.category_id, item_id=item.id)}}">
-					<h4>{{item.name}} (<span class="oblique">{{item.category.name}}</span>)</h4>		
+				<a class="capitalize text-color" 
+					href="{{url_for('showListItem', category_id=item.category_id, item_id=item.id)}}">
+					<h4 class="border-bottom">{{item.name}} 
+						<span class="oblique">({{item.category.name}})</span></h4>		
 				</a>
 			{% endfor %}
-			
 		</div>
 		
+		<div class="col-md-1"></div>
 	</div>
 
 {% endblock %}
