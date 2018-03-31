@@ -22,6 +22,7 @@ import httplib2
 import json
 from flask import make_response
 import requests
+import bleach
 
 
 app = Flask(__name__)
@@ -260,7 +261,7 @@ def newCategory():
     if 'username' not in login_session:
         return redirect('/login')
     if request.method == 'POST':
-        newCategory = Category(name=request.form['name'],
+        newCategory = Category(name=bleach.clean(request.form['name']),
                                user_id=login_session['user_id'])
         session.add(newCategory)
         flash('New Category %s Successfully Created' % newCategory.name)
@@ -282,7 +283,7 @@ to edit this restaurant. Please create your own restaurant in order \
 to edit.');}</script><body onload='myFunction()'>"
     if request.method == 'POST':
         if request.form['name']:
-            editedCategory.name = request.form['name']
+            editedCategory.name = bleach.clean(request.form['name'])
             session.add(editedCategory)
             session.commit()
             flash('Category Successfully Edited %s' % editedCategory.name)
@@ -380,8 +381,8 @@ def newListItem(category_id):
     if request.method == 'POST':
         category_name = request.form['category']
         category = session.query(Category).filter_by(name=category_name).one()
-        newItem = ListItem(name=request.form['name'],
-                           description=request.form['description'],
+        newItem = ListItem(name=bleach.clean(request.form['name']),
+                           description=bleach.clean(request.form['description']),
                            category_id=category.id,
                            user_id=login_session['user_id'])
         session.add(newItem)
@@ -411,9 +412,9 @@ to edit this restaurant. Please create your own restaurant in order \
 to edit.');}</script><body onload='myFunction()'>"
     if request.method == 'POST':
         if request.form['name']:
-            editedItem.name = request.form['name']
+            editedItem.name = bleach.clean(request.form['name'])
         if request.form['description']:
-            editedItem.description = request.form['description']
+            editedItem.description = bleach.clean(request.form['description'])
         if request.form['description']:
             category_name = request.form['category']
             category = session.query(Category).filter_by(
